@@ -29,8 +29,9 @@ jobs:
         cd build
         cmake -DPYTHON_EXECUTABLE=/usr/bin/python3 ..
         make
-    - name: run a test
+    - name: run tests
       run: |
         export PYTHONPATH="${PYTHONPATH}:build"
-        python3 create_and_load_module.py
+        python3 create_and_load_cpp_code.py
+        python3 create_and_load_fortran_lib.py
         
