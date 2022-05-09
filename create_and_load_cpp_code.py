@@ -4,11 +4,11 @@ sys.setdlopenflags(os.RTLD_GLOBAL | os.RTLD_LAZY)
 import subprocess
 
 
-def write_code(msg="Greetings!"):
+def write_code(msg="Greetings from c++!"):
     with open("temp.cpp", "w") as f:
         f.write(
             f"""
-#include "../Derived.h"
+#include "Derived.h"
 #include <iostream>
 Derived::Derived() {{}}
 Derived::~Derived() {{}}
@@ -29,4 +29,4 @@ p = subprocess.run(
 
 import my_module
 
-my_module.load_plugin("./my_tmp_lib.so").foo()
+my_module.load_plugin(lib_path).foo()

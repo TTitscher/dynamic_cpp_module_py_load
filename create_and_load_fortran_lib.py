@@ -35,11 +35,13 @@ p = subprocess.run(
 )
 
 p = subprocess.run(
-    ["gcc", "-o", lib_path, "temp.o", "-shared", "-L.", "-lhello", "-lgfortran"],
+    ["gcc", "-o", lib_path, "temp_f.o", "-shared", "-L.", "-lhello", "-lgfortran"],
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
 )
+print(p.stderr)
+
 
 import my_module
 
-my_module.load_plugin(lib_path).foo()
+# my_module.load_plugin(lib_path).foo()
