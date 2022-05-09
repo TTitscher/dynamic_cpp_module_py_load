@@ -7,17 +7,4 @@ Just an adaptation of https://stackoverflow.com/questions/60799939/dynamically-l
 
 # how to:
 
-Make sure to have pybind installed
-
-~~~sh
-pip3 install pybind11
-~~~
-
-~~~sh
-mkdir build && cd build
-cmake -DPYTHON_EXECUTABLE=/usr/bin/python3 ..
-make
-
-python3 ../create_and_load_module.py
-~~~
-
+[Follow the CI instructions](.github/workflows/python-app.yml)

@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install requirements
+      run: |
+        sudo apt install python3-pybind11
+    - name: Create fortran lib
+      run: |
+        gfortran -c hello.f
+        ar rcs libhello.a hello.o
+    - name: Build c++ code
+      run: |
+        mkdir build
+        cd build
+        cmake -DPYTHON_EXECUTABLE=/usr/bin/python3 ..
+        make
+    - name: run a test
+      run: |
+        export PYTHONPATH="${PYTHONPATH}:build"
+        python3 create_and_load_module.py
+        
