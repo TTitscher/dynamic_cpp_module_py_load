@@ -1,3 +1,6 @@
+[![Python application](https://github.com/TTitscher/dynamic_cpp_module_py_load/actions/workflows/python-app.yml/badge.svg)](https://github.com/TTitscher/dynamic_cpp_module_py_load/actions/workflows/python-app.yml)
+
+
 # dynamic_cpp_module_py_load
 
 Creates a python-wrapped c++ base class where the implementation can be changed at run time.
