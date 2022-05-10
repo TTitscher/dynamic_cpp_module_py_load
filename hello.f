@@ -1,4 +1,5 @@
-        subroutine hello()
+        subroutine hello(param)
+            double precision param
             print *, "Hello module!"
-            return
+            param = 6174.
         end

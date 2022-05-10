@@ -11,10 +11,10 @@ def write_code():
 #include <iostream>
 
 extern "C" {{
-void hello_();
-void param0()
+void hello_(double*);
+void param0(double* out)
 {{
-hello_();
+hello_(out);
 }}
 }}
 """
@@ -30,6 +30,7 @@ p = subprocess.run(
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
 )
+assert not p.stderr
 
 p = subprocess.run(
     ["gcc", "-o", lib_path, "temp_f.o", "-shared", "-L.", "-lhello", "-lgfortran"],
@@ -42,4 +43,4 @@ assert not p.stderr
 import my_module
 
 mat = my_module.LoadedMaterial(lib_path)
-mat.param0()
+assert mat.param0() == 6174.

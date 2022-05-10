@@ -7,10 +7,11 @@
 /*
  * Load a material following assumes that
  * `libname` is a shared library and includes
- *      void param0();
+ *      void param0(double*);
+ *      void eval(double*, double*);
  */
 
-typedef void (*func_t)();
+typedef void (*func_t)(double*);
 
 class LoadedMaterial {
    public:
@@ -27,7 +28,11 @@ class LoadedMaterial {
         }
     }
 
-    void param0() { return _f_param0(); }
+    double param0() {
+        double out;
+        _f_param0(&out);
+        return out;
+    }
 
    private:
     void* _libHandle;
