@@ -4,22 +4,19 @@ sys.setdlopenflags(os.RTLD_GLOBAL | os.RTLD_LAZY)
 import subprocess
 
 
-def write_code(msg="Greetings!"):
+def write_code():
     with open("temp_f.cpp", "w") as f:
         f.write(
             f"""
-#include "Derived.h"
-
 #include <iostream>
 
 extern "C" {{
 void hello_();
+void param0()
+{{
+hello_();
 }}
-
-Derived::Derived() {{}}
-Derived::~Derived() {{}}
-
-void Derived::foo() {{ hello_(); }}
+}}
 """
         )
 
@@ -39,9 +36,10 @@ p = subprocess.run(
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
 )
-print(p.stderr)
+assert not p.stderr
 
 
 import my_module
 
-# my_module.load_plugin(lib_path).foo()
+mat = my_module.LoadedMaterial(lib_path)
+mat.param0()
