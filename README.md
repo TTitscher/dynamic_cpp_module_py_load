@@ -3,10 +3,12 @@
 
 # dynamic_cpp_module_py_load
 
-Creates a python-wrapped c++ base class where the implementation can be changed at run time.
+The purpose of this code is to play around with dynamic loading of c++ code at runtime that can be used to dynamically wrap fortran code.
 
-Just an adaptation of https://stackoverflow.com/questions/60799939/dynamically-linking-a-shared-library-from-a-pybind11-wrapped-code
+The main idea is to define a c++ class that loads a shared library (given at runtime) and wraps
+a pre-defined set of functions.
 
+This class is then accessible in python via pybind11.
 
 # how to:
 
